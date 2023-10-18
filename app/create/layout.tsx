@@ -6,7 +6,7 @@ export default function CreateTodoLayout({
     children: React.ReactNode
     }) {
     return (
-        <section className="bg-gray-500">
+        <section className="bg-white">
         
         <nav></nav>
             {children}
