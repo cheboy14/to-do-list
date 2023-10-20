@@ -1,44 +1,32 @@
 "use client";
-
-import { addTodoTask } from '@/api';
+import { ITask } from '@/types/tasks';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, {FormEventHandler, useState} from 'react'
-import { v4 as uuidv4 } from 'uuid';
+import React, {useState} from 'react'
 
-export default function CreateTodo() {
+interface TaskProps {
+    task: ITask
+}
 
-    const [newTask, setNewTask] = useState<string>("");
-    const router = useRouter();
 
-    const handleSubmitTodo: FormEventHandler<HTMLFormElement> = async (e) => {
-        e.preventDefault();
+const Update: React.FC<TaskProps> = ({task}) => {
+    const router = useRouter()
+    const [taskToEdit, setTaskToEdit] = useState<string>(task.task);
 
-        if (newTask !== "") {
-            await addTodoTask({
-                id: uuidv4(),
-                task: newTask
-            })
-            router.push('/');
-            router.refresh();
-            setNewTask("");
-            alert("Task added successfully");
-        }
-        else{
-            alert("Textarea is empty. Add a task!");
-        }
-    };
+    const handleSubmitEditTodo = () => {
+
+    }
 
     return (
         <div className="flex justify-center items-center h-screen">
         <div>
             <h1 className="text-3xl font-bold text-center text-black">Add a Task</h1>
             <p className="text-center text-black font-light">Use this form to add a task.</p> <br />
-            <form onSubmit={handleSubmitTodo}>
+            <form onSubmit={handleSubmitEditTodo}>
                 <div className="flex flex-col justify-center items-center">
                     <textarea
-                        value={newTask}
-                        onChange={(text) => setNewTask(text.target.value)}
+                        value={taskToEdit}
+                        onChange={(text) => setTaskToEdit(text.target.value)}
                         placeholder="Todo name"
                         rows={2}
                         cols={38}
@@ -66,3 +54,5 @@ export default function CreateTodo() {
     </div>
     )
 }
+
+export default Update

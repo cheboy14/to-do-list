@@ -13,8 +13,13 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      backgroundColor: {
+        'dodgerblue': 'dodgerblue',
+        'dodgerblue-light': 'light-dodgerblue-color',
+        'green': 'green', // Define your desired lighter color here
+      },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 }
 export default config
